@@ -2,10 +2,15 @@ package cn.nt.xinglinyifang.service;
 
 
 import cn.nt.xinglinyifang.model.Doctor;
+import com.jfinal.kit.Kv;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.SqlPara;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * @author 74123
@@ -53,6 +58,8 @@ public class DoctorService {
                 .set("tel", tel).set("position", position).set("num_year", numYear).set("age", age);
 
         doc.save();
+
+        LOGGER.info("向 doctor 表中插入一条医师记录：" + doc);
     }
 
     /**
@@ -63,5 +70,32 @@ public class DoctorService {
     public Doctor getById(int id) {
         return Doctor.dao.findById(id);
     }
+
+    /**
+     * 从数据表中随机取出6条医师记录,内容包括id，name，
+     * @return 医师记录的List
+     */
+    public List<Record> getDoctorsRand() {
+        String sql = Db.getSql("doctor.randList");
+        List<Record> list =  Db.find(sql);
+        for (Record record : list) {
+            int id = record.getInt("id");
+            String url = getDocImg(id);
+            record.set("url", url);
+        }
+        return list;
+    }
+
+    /**
+     * 根据医生id获取医生的头像url
+     * @param id 医生id
+     * @return 头像url
+     */
+    private String getDocImg(int id) {
+        Kv cond = Kv.by("type=", 1).set("outer_id=", id);
+        SqlPara sqlPara = Db.getSqlPara("relationship.find", Kv.by("cond", cond));
+        return String.valueOf(Db.findFirst(sqlPara));
+    }
+
 
 }
