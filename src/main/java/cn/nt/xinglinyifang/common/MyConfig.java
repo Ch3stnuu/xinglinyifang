@@ -37,17 +37,17 @@ public class MyConfig extends JFinalConfig {
         //ARP插件
         ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
         me.add(arp);
-        arp.setBaseSqlTemplatePath(PathKit.getWebRootPath() + "/WEB-INF");
+        arp.setBaseSqlTemplatePath(PathKit.getWebRootPath());
         arp.addSqlTemplate("sql/all.sql");
-        arp.addMapping("activation", Activation.class);
+        arp.addMapping("activation_record", Activation.class);
         arp.addMapping("disease", Disease.class);
         arp.addMapping("doctor", Doctor.class);
-        arp.addMapping("medicalCase", MedicalCase.class);
+        arp.addMapping("medical_case", MedicalCase.class);
         arp.addMapping("medicine", Medicine.class);
-        arp.addMapping("Picture", Picture.class);
-        arp.addMapping("relationship", Relationship.class);
+        arp.addMapping("common_picture", Picture.class);
+        arp.addMapping("dd_relationship", Relationship.class);
         arp.addMapping("technology", Technology.class);
-        arp.addMapping("video", Video.class);
+        arp.addMapping("common_video", Video.class);
 
     }
 

@@ -1,35 +1,35 @@
-#namespce("activation")
+#namespace("activation")
   #include("activation.sql")
 #end
 
 #namespace("disease")
-  #inclide("disease.sql")
+  #include("disease.sql")
 #end
 
 #namespace("doctor")
-  #inclide("doctor.sql")
+  #include("doctor.sql")
 #end
 
 #namespace("medicalCase")
-  #inclide("medicalCase.sql")
+  #include("medicalCase.sql")
 #end
 
 #namespace("medicine")
-  #inclide("medicine.sql")
+  #include("medicine.sql")
 #end
 
 #namespace("picture")
-  #inclide("picture.sql")
+  #include("picture.sql")
 #end
 
 #namespace("relationship")
-  #inclide("relationship.sql")
+  #include("relationship.sql")
 #end
 
 #namespace("technology")
-  #inclide("technology.sql")
+  #include("technology.sql")
 #end
 
 #namespace("video")
-  #inclide("video.sql")
+  #include("video.sql")
 #end
