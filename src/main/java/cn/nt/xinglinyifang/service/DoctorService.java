@@ -19,11 +19,13 @@ public class DoctorService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DoctorService.class);
 
+    private static final int DOC_TYPE = 1;
+
     private DoctorService() {}
 
     /**
      * 私有构造方法，使用getInstance()方法创建对象
-     * @return Doctor的对象
+     * @return DoctorService的对象
      */
     public static DoctorService getInstance() {
         return new DoctorService();
@@ -72,7 +74,7 @@ public class DoctorService {
     }
 
     /**
-     * 从数据表中随机取出6条医师记录,内容包括id，name，
+     * 从数据表中随机取出6条医师记录,内容包括id，name，简介glory，图片pic
      * @return 医师记录的List
      */
     public List<Record> getDoctorsRand() {
@@ -80,21 +82,10 @@ public class DoctorService {
         List<Record> list =  Db.find(sql);
         for (Record record : list) {
             int id = record.getInt("id");
-            String url = getDocImg(id);
-            record.set("url", url);
+            String url = CommonService.getImgUrl(DOC_TYPE, id);
+            record.set("pic", url);
         }
         return list;
-    }
-
-    /**
-     * 根据医生id获取医生的头像url
-     * @param id 医生id
-     * @return 头像url
-     */
-    private String getDocImg(int id) {
-        Kv cond = Kv.by("type=", 1).set("outer_id=", id);
-        SqlPara sqlPara = Db.getSqlPara("relationship.find", Kv.by("cond", cond));
-        return String.valueOf(Db.findFirst(sqlPara));
     }
 
 
