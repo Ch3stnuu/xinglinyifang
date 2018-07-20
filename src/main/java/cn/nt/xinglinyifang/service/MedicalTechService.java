@@ -20,7 +20,7 @@ public class MedicalTechService {
 
     /**
      * 私有构造方法，使用getInstance()方法创建对象
-     * @return MedicalService的对象
+     * @return MedicalService的对象。
      */
     public static MedicalTechService getInstance() {
         return new MedicalTechService();
